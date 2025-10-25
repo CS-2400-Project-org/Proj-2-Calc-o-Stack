@@ -2,6 +2,9 @@ import java.lang.Character;
 public class Calculator {
     
 
+    public Integer convertToPostfix(String infix)
+    {
+    }
 
 
     public Integer evaluatePostfix(String postFix){
@@ -44,7 +47,6 @@ public class Calculator {
 
         } else if (operation == '^') {
             return operand1^operand2;
-
         } 
 
         return Integer.valueOf(999999);
