@@ -4,8 +4,9 @@ import org.junit.Test;
 
 public class CalculatorTest 
 {
+    //Testing for converToPostfix
 
-
+    //Testing for evaluatePostfix
     @Test
     public void evaluatePostfixTesting1(){
         //Basic test on given expression 
@@ -21,5 +22,16 @@ public class CalculatorTest
         Integer expected = 33;
         assertEquals(expected, Calculator.evaluatePostfix(postfix));
     }
+
+    @Test 
+    public void evaluatePostfixTesting3(){
+        //Test for evaluating mutlti digit input
+        String postfix = "(12)2*";
+        Integer expected = 24;
+        assertEquals(expected, Calculator.evaluatePostfix(postfix) );
+    }
+
+
+    
     
 }
