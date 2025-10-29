@@ -106,6 +106,9 @@ public class Calculator
         while(index < postFix.length()){
             char nextCharacter = postFix.charAt(index);
             if(Character.isDigit(nextCharacter)){
+                //Issue: Integer.valueOf(Character.toString(nextCharacter)) is unnecessarily complex 
+                //and could cause issues. Should use Character.getNumericValue(nextCharacter) to 
+                //directly convert char digit to int value.
                 System.out.println("Pushing to stack: " + Integer.valueOf(Character.toString(nextCharacter)));
                 valueStack.push(Integer.valueOf(Character.toString(nextCharacter)));
             }
@@ -140,9 +143,15 @@ public class Calculator
             return operand1 / operand2;
 
         } else if (operation == '^') {
+            //Issue: ^ is bitwise XOR in Java, not exponentiation. This returns wrong results 
+            //(e.g., 2^3 = 1 instead of 8). Solution: use (int) Math.pow(operand1, operand2) for 
+            //mathematical exponentiation.
             return operand1^operand2;
         } 
 
+        //Issue: Returning 999999 for unknown operations is poor error handling. 
+        //Solution: throw IllegalArgumentException("Unknown operator: " + operation) 
+        //for better error reporting.
         return Integer.valueOf(999999);
     }
 }
