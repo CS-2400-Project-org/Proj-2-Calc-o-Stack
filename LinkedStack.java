@@ -64,9 +64,9 @@ public class LinkedStack<T> implements StackInterface<T>
         private T data;//Entry in stack
         private Node next;//Link to next node
 
-        public Node(T dataSection)
+        public Node(T dataPortion)
         {
-            this.data = dataSection;
+            this.data = dataPortion;
             this.next = null;
         }//End default constructor
 
@@ -77,9 +77,9 @@ public class LinkedStack<T> implements StackInterface<T>
         }
 
         /** Sets the data for this node. */
-        public void setData(T dataSection)
+        public void setData(T dataPortion)
         {
-            this.data = dataSection;
+            this.data = dataPortion;
         }
         /** Sets the next node reference for this node. */
         public void setNext(Node nextNode)
