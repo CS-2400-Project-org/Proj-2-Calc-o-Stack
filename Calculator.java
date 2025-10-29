@@ -2,6 +2,9 @@ import java.lang.Character;
 
 public class Calculator 
 {
+    public static void main(String[] args) {
+        evaluatePostfix("23*42-/56*+");
+    }
     public String convertToPostfix(String infix)
     {
         StackInterface<Character> operatorStack = new LinkedStack<>();
@@ -94,24 +97,26 @@ public class Calculator
         }
     }
 
-    public Integer evaluatePostfix(String postFix){
+    public static Integer evaluatePostfix(String postFix){
     
         ResizableArrayStack<Integer> valueStack = new ResizableArrayStack<>(postFix.length());
         int index = 0;
         while(index < postFix.length()){
             char nextCharacter = postFix.charAt(index);
             if(Character.isDigit(nextCharacter)){
-
-                valueStack.push(Integer.valueOf(nextCharacter));
+                System.out.println("Pushing to stack: " + Integer.valueOf(Character.toString(nextCharacter)));
+                valueStack.push(Integer.valueOf(Character.toString(nextCharacter)));
             }
             else if(nextCharacter == '+' ||nextCharacter == '-'||nextCharacter == '*'
                     || nextCharacter == '/' || nextCharacter == '^'){
 
                 Integer operandTwo = valueStack.pop();
                 Integer operandOne = valueStack.pop();
+                System.out.println("Val1: " + operandOne + " Val2: " + operandTwo + " " +nextCharacter);
 
                 Integer result = operate(operandOne, operandTwo, nextCharacter);
                 valueStack.push(result);
+                System.out.println(result);
             }
             index++;
         }
@@ -119,7 +124,7 @@ public class Calculator
         return valueStack.peek();
     }
 
-    public Integer operate(Integer operand1, Integer operand2, char operation){
+    public static  Integer operate(Integer operand1, Integer operand2, char operation){
         if(operation == '+'){
             return operand1 + operand2;
 
