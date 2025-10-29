@@ -3,7 +3,9 @@ import java.lang.Character;
 public class Calculator 
 {
     public static void main(String[] args) {
-        evaluatePostfix("23*42-/56*+");
+        System.out.println("The evaluation of the postfix expression (23*42-/56*+) is " +
+                           evaluatePostfix("23*42-/56*+"));
+        
     }
     public String convertToPostfix(String infix)
     {
