@@ -1,13 +1,34 @@
 import java.lang.Character;
 
+/**
+ * A calculator class that converts infix expressions to postfix notation
+ * and evaluates postfix expressions using stack-based algorithms.
+ */
 public class Calculator 
-{
-    public static void main(String[] args) {
+{  
+    /**
+     * Main method to test the calculator functionality.
+     * Demonstrates infix to postfix conversion and postfix evaluation.
+     * @param args command line arguments
+     */
+    public static void main(String[] args)
+    {
+        //Test infix to postfix conversion with a complex expression
+        System.out.println("The infix conversion results in " +
+                           convertToPostfix("a*b/(c-a)+d*e"));
+        //Test postfix evaluation with a numeric expression
         System.out.println("The evaluation of the postfix expression (23*42-/56*+) is " +
-                           evaluatePostfix("23*42-/56*+"));
-        
+                           evaluatePostfix("23*42-/56*+"));  
     }
-    public String convertToPostfix(String infix)
+    
+    /**
+     * Converts an infix expression to postfix notation.
+     * Handles operator precedence, associativity, and parentheses properly.
+     * Supports operators: +, -, *, /, ^ and parentheses ( ).
+     * @param infix the infix expression to convert
+     * @return the equivalent postfix expression
+     */
+    public static String convertToPostfix(String infix)
     {
         StackInterface<Character> operatorStack = new LinkedStack<>();
         StringBuilder postfix = new StringBuilder();
@@ -27,7 +48,7 @@ public class Calculator
 
             switch (nextChar)
             {
-                // Case 1: Operand
+                //Case 1: Operand
                 default: 
                 if(Character.isLetterOrDigit(nextChar))
                 {
@@ -35,7 +56,7 @@ public class Calculator
                 }
                 break;
 
-                // Case 2: Exponent (right-associative)
+                //Case 2: Exponent(right-associative)
                 case '^' :
                 while (!operatorStack.isEmpty() &&  
                 precedence(nextChar) < precedence(operatorStack.peek()))
@@ -45,7 +66,7 @@ public class Calculator
                 operatorStack.push(nextChar);
                 break; 
 
-                // Case 3: Operators
+                //Case 3: Operators
                 case '+' : case '-' : case '*' : case '/' : 
                 while (!operatorStack.isEmpty() &&  
                 precedence(nextChar) <= precedence(operatorStack.peek()))
@@ -55,13 +76,13 @@ public class Calculator
                 operatorStack.push(nextChar);
                 break;
 
-                // Case 4: Left Parenthesis
+                //Case 4: Left Parenthesis
                 case '(' :
                 operatorStack.push(nextChar);
                 break;
 
-                // Case 5: Right Parenthesis
-                case ')' : // Stack is not empty if infix expression is valid 
+                //Case 5: Right Parenthesis
+                case ')' : //Stack is not empty if infix expression is valid 
                 topOperator = operatorStack.pop();
                 while (topOperator != '(')
                 {
@@ -73,6 +94,8 @@ public class Calculator
 
             index++;
         }
+
+        //Pop remaining operators from stack
         while (!operatorStack.isEmpty())
         {
             topOperator = operatorStack.pop();
@@ -82,6 +105,13 @@ public class Calculator
         return postfix.toString();       
     }
 
+    /**
+     * Determines the precedence level of an operator.
+     * Higher numbers indicate higher precedence.
+     * Used to determine operator evaluation order in infix to postfix conversion.
+     * @param operator the operator character to evaluate (+, -, *, /, ^)
+     * @return the precedence level
+     */
     private static int precedence(char operator)
     {
         switch(operator)
