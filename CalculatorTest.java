@@ -91,9 +91,5 @@ public class CalculatorTest
         String postfix = "(12)2*";
         Integer expected = 24;
         assertEquals(expected, Calculator.evaluatePostfix(postfix) );
-    }
-
-
-    
-    
+    }      
 }
