@@ -91,7 +91,6 @@ public class Calculator
                 }
                 break;
             }
-
             index++;
         }
 
@@ -101,7 +100,6 @@ public class Calculator
             topOperator = operatorStack.pop();
             postfix.append(topOperator);
         }
-
         return postfix.toString();       
     }
 
@@ -164,22 +162,9 @@ public class Calculator
                 Integer result = operate(operandOne, operandTwo, nextCharacter);
                 valueStack.push(result);
                 System.out.println(result);
-            //If a parenthesis open is found assume a multi-digit operand is being input.
-            } else if( nextCharacter == '('){
-                int closeIndex = index;
-                //Find the substring leading to the paren close
-                while (postFix.charAt(closeIndex) != ')') {
-                    closeIndex++; 
-                }
-
-                //Add the muti digit integer to the stack and continue
-                valueStack.push(Integer.valueOf(postFix.substring(index+1, closeIndex)));
-                index = closeIndex;
-                continue;
-            }//Ignore this character in the case that no condition is hit
+            }
             index++;
         }
-
         return valueStack.peek();
     }
 
