@@ -68,9 +68,9 @@ public class CalculatorTest
         assertEquals(expected, Calculator.convertToPostfix(infix));
     }
 
-    //TESTING for evaluatePostfix
+    //Testing for evaluatePostfix
     @Test
-    public void evaluatePostfixTesting1(){
+    public void evaluatePostfixGeneral1(){
         //Basic test on given expression 
         String postfix = "23*42-/56*+";
         Integer expected = 33;
@@ -78,7 +78,7 @@ public class CalculatorTest
     }
 
     @Test
-    public void evaluatePostfixTesting2(){
+    public void evaluatePostfixUnexpected(){
         //Test for ignoring unexpected values
         String postfix = "23*42qwertyuiopasdfghjklzxcvbnm<>?;':\"[]{}|\\!@#$%&~`-/56*+";
         Integer expected = 33;
@@ -86,14 +86,19 @@ public class CalculatorTest
     }
 
     @Test 
-    public void evaluatePostfixTesting3(){
+    public void evaluatePostfixMultidigitInput(){
         //Test for evaluating mutlti digit input
         String postfix = "(12)2*";
         Integer expected = 24;
         assertEquals(expected, Calculator.evaluatePostfix(postfix) );
     }
 
-
-    
+    @Test
+    public void evaluatePostfixoperators(){
+        //Test for evaluating each operator
+        String postfix = "(12)6-2*4/3^5+";
+        Integer expected = 32;
+        assertEquals(expected, Calculator.evaluatePostfix(postfix));
+    }
     
 }

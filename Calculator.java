@@ -129,19 +129,31 @@ public class Calculator
         }
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Take in a string and evaluate it as a postfix expression.
+     * @param postFix A string that represents a valid postfix expression
+     * @return An Integer value that results from the proper evaluation of the give postfix
+     */
     public static Integer evaluatePostfix(String postFix){
-    
+        
+        //Stack will hold operands as they are encountered
         ResizableArrayStack<Integer> valueStack = new ResizableArrayStack<>(postFix.length());
         int index = 0;
+
+        //Loop the span of the string and check each character
         while(index < postFix.length()){
             char nextCharacter = postFix.charAt(index);
+
+            //If a character is an integer push it to the stack
             if(Character.isDigit(nextCharacter)){
-                //Issue: Integer.valueOf(Character.toString(nextCharacter)) is unnecessarily complex 
-                //and could cause issues. Should use Character.getNumericValue(nextCharacter) to 
-                //directly convert char digit to int value.
-                System.out.println("Pushing to stack: " + Integer.valueOf(Character.toString(nextCharacter)));
-                valueStack.push(Integer.valueOf(Character.toString(nextCharacter)));
+                System.out.println("Pushing to stack: " + Character.getNumericValue(nextCharacter));
+                valueStack.push(Character.getNumericValue(nextCharacter));
             }
+            //If a character is a known operator perform that operation on the top two stack items
             else if(nextCharacter == '+' ||nextCharacter == '-'||nextCharacter == '*'
                     || nextCharacter == '/' || nextCharacter == '^'){
 
@@ -171,7 +183,16 @@ public class Calculator
         return valueStack.peek();
     }
 
-    public static  Integer operate(Integer operand1, Integer operand2, char operation){
+    /**
+     * Performs a mathematical operaion given the operator and it's two operands with the structure:
+     * (Operand 1, Operator, Operand 2)
+     * @param operand1 first operand of expression
+     * @param operand2 second operand of expression
+     * @param operation the operation to be performed
+     * @return result of evaluating the expression
+     * @throws IllegalArgumentException If the given operator is not recognized.
+     */
+    private static Integer operate(Integer operand1, Integer operand2, char operation) throws IllegalArgumentException{
         if(operation == '+'){
             return operand1 + operand2;
 
@@ -185,15 +206,9 @@ public class Calculator
             return operand1 / operand2;
 
         } else if (operation == '^') {
-            //Issue: ^ is bitwise XOR in Java, not exponentiation. This returns wrong results 
-            //(e.g., 2^3 = 1 instead of 8). Solution: use (int) Math.pow(operand1, operand2) for 
-            //mathematical exponentiation.
-            return operand1^operand2;
+            return (int) Math.pow(operand1, operand2);
         } 
 
-        //Issue: Returning 999999 for unknown operations is poor error handling. 
-        //Solution: throw IllegalArgumentException("Unknown operator: " + operation) 
-        //for better error reporting.
-        return Integer.valueOf(999999);
+        throw new IllegalArgumentException("Unknown Operator" + operation);
     }
 }

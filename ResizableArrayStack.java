@@ -104,6 +104,13 @@ public class ResizableArrayStack<T> implements StackInterface<T> {
     }
 
     /**
+     * Provides the number of entries in the stack
+     * @return the number of items as an integer
+     */
+    public int getNumEntries(){
+        return topIndex+1;
+    }
+    /**
      * Is called in all public methods to ensure the stack is not corrupt
      * @throws SecurityException In the event that initialization failed
      */
