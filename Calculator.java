@@ -148,7 +148,6 @@ public class Calculator
 
             //If a character is an integer push it to the stack
             if(Character.isDigit(nextCharacter)){
-                System.out.println("Pushing to stack: " + Character.getNumericValue(nextCharacter));
                 valueStack.push(Character.getNumericValue(nextCharacter));
             }
             //If a character is a known operator perform that operation on the top two stack items
@@ -157,12 +156,22 @@ public class Calculator
 
                 Integer operandTwo = valueStack.pop();
                 Integer operandOne = valueStack.pop();
-                System.out.println("Val1: " + operandOne + " Val2: " + operandTwo + " " +nextCharacter);
-
                 Integer result = operate(operandOne, operandTwo, nextCharacter);
                 valueStack.push(result);
-                System.out.println(result);
             }
+            //If a parenthesis open is found assume a multi-digit operand is being input.
+            else if( nextCharacter == '('){
+                int closeIndex = index;
+                //Find the substring leading to the paren close
+                while (postFix.charAt(closeIndex) != ')') {
+                    closeIndex++; 
+                }
+
+                //Add the muti digit integer to the stack and continue
+                valueStack.push(Integer.valueOf(postFix.substring(index+1, closeIndex)));
+                index = closeIndex;
+                continue;
+            }//Ignore this character in the case that no condition is hit
             index++;
         }
         return valueStack.peek();
