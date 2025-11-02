@@ -200,9 +200,10 @@ public class Calculator
             return operand1 / operand2;
 
         } else if (operation == '^') {
+           
             return (int) Math.pow(operand1, operand2);
         } 
 
-        throw new IllegalArgumentException("Unknown Operator" + operation);
+       throw new IllegalArgumentException("Unknown operator: " + operation);    
     }
 }
