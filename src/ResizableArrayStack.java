@@ -1,3 +1,4 @@
+package src;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
@@ -5,11 +6,7 @@ import java.util.EmptyStackException;
 /**
  * A class implementing a stack structure using an array that increases in size as necessary.
  * The size of the array cannot be decreased.
- * @param stack The stack that will hold all entries
- * @param topIndex The index of the entry at the top of the stack
- * @param DEFAULT_CAPACITY The default value that will be used for stack size if one is not given
- * @param MAX_CAPACITY The maximum value a stack can reach before the array can no longer resize
- * @param integrityOk Set to true on successful construction to indicate non-corrupt stack
+ * @param <T> The object type that will be contained by the stack.
  */
 public class ResizableArrayStack<T> implements StackInterface<T> {
     private T[] stack;

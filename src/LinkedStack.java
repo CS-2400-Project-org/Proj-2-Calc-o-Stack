@@ -1,13 +1,18 @@
+package src;
 import java.util.EmptyStackException;
 
 /**
    A class of stacks whose entries are stored in a chain of nodes
+   @param <T> The object type that will be contained by the stack.
    @author Frank M. Carrano
 */
 public class LinkedStack<T> implements StackInterface<T> 
 {
     private Node topNode;//reference to first node in the chain
 
+    /** 
+     * Default constructor that generates a stack with no entries.
+    */
     public LinkedStack()
     {
         topNode = null;

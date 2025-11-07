@@ -1,3 +1,4 @@
+package src;
 import java.lang.Character;
 
 /**
@@ -14,13 +15,25 @@ public class Calculator
     public static void main(String[] args)
     {
         //Test infix to postfix conversion with a complex expression
-        System.out.println("The infix conversion results in " +
+        System.out.println("The infix conversion of a*b/(c-a)+d*e results in " +
                            convertToPostfix("a*b/(c-a)+d*e"));
         //Test postfix evaluation with a numeric expression
         System.out.println("The evaluation of the postfix expression (23*42-/56*+) is " +
                            evaluatePostfix("23*42-/56*+"));  
     }
     
+
+
+
+    //I couldn't get the javadocs to generate without this I'm not sure why.
+    /**
+     * A default constructor for the calculator class that currently servees no purpose.
+     */
+    public Calculator(){
+
+    }
+
+
     /**
      * Converts an infix expression to postfix notation.
      * Handles operator precedence, associativity, and parentheses properly.
