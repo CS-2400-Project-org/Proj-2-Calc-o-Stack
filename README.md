@@ -24,3 +24,4 @@ Ex: (2)3+ = 2 + 3
 Excell sheet: https://livecsupomona-my.sharepoint.com/:x:/g/personal/kayshawnw_cpp_edu/EWeFBi845ktGuC8FEixt89IB1tFeKv499w40RdGLfEgwWQ?e=Yh8obD  
 
 ## Video Link
+Video: https://youtu.be/j3Q7pCAvVng
